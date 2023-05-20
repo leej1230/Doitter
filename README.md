@@ -5,7 +5,7 @@
 {
     "ToDo": [
         {
-            "todo_id": ObjectId,
+            "todo_id": String,
             "text": String,
             "cnt_used": Integer,
             "cnt_done": number
@@ -13,10 +13,11 @@
     ],
     "Post": [
         {
-            "post_id": ObjectId,
-            "user_id": ObjectId,
+            "post_id": String,
+            "user_id": String,
             "created": Date,
-            "todo_list": ObjectId[],
+            "todo_list": String[],
+            "liked_users": String[],
             "checked": Boolean[]
         }
     ],
@@ -25,8 +26,8 @@
             "user_id": String,
             "name": String,
             "email": String,
-            "register_date": Date,
-            "bookmarked_todo": ObjectId[]
+            "registered_date": Date,
+            "liked_posts": String[]
         }
     ]
 }
