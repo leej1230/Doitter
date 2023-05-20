@@ -3,12 +3,18 @@
 # Data Schema
 ```
 {
+    "Tag": [
+        {
+            "name": String,
+            "cnt_used": Integer,
+            "cnt_done": Integer
+        }
+    ],
     "ToDo": [
         {
             "todo_id": String,
             "text": String,
-            "cnt_used": Integer,
-            "cnt_done": number
+            "tag": String[],
         }
     ],
     "Post": [
