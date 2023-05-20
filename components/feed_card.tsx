@@ -1,32 +1,15 @@
 import React from 'react';
-{/* 
-<li class="list-group-item">
-    <div class="media">
-        <div class="media-left">
-            <a class="avatar avatar-online" href="javascript:void(0)">
-            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
-            <i></i>
-            </a>
-        </div>
-        <div class="media-body">
-            <small class="text-muted pull-right">Just now</small>
-            <h4 class="media-heading">@Ramon Dunn</h4>
-            <div>Lorem ipsum Veniam aliquip culpa laboris minim tempor labore
-            commodo officia veniam non in in in.</div>
-        </div>
-    </div>
-</li>
-*/}
+// https://www.bootdey.com/snippets/view/twitter-feeds#css
 
 import Image from 'next/image';
 
 interface CardProps {
     user_id: string;
-    todo_list: number[];
+    todo_list: string[];
     checked: boolean[];
 }
 
-export default function Card(: CardProps) {
+export default function Card({ user_id, todo_list, checked }: CardProps) {
     return (
         <>
             <li className="list-group-item">
@@ -39,7 +22,7 @@ export default function Card(: CardProps) {
                     </div>
                     <div className="media-body">
                         <small className="text-muted pull-right">Just now</small>
-                        <h4 className="media-heading">@Ramon Dunn</h4>
+                        <h4 className="media-heading">{user_id}</h4>
                         <div></div>
                     </div>
                 </div>
