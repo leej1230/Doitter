@@ -10,33 +10,30 @@ export interface ResponseFuncs {
 // Interface to define our Todo model on the frontend
 export interface Todo {
   _id?: number
-  item: string
-  completed: boolean
+  text: string;
+  tag: string[];
 }
 
 export interface Tag {
+  _id?: number
   name: string;
   cnt_used: number;
   cnt_done: number;
 }
 
-export interface ToDo2 {
-  todo_id: string;
-  text: string;
-  tag: string[];
-}
-
 export interface Post {
+  _id?: number
   post_id: string;
   title: string;
   content: string;
   author_id: string;
-  todo_list: ToDo2[];
+  todo_list: Todo[];
   liked_users: string[];
   checked: boolean[];
 }
 
 export interface User {
+  _id?: number
   user_id: string;
   name: string;
   email: string;
