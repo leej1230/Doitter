@@ -8,8 +8,10 @@ export default function Home() {
     <main className={styles.main}>
       <Image src="/logo.jpeg" alt={''} width={100} height={100}></Image>
       <h1 className={styles.title}> Welcome to DoItter</h1>
+      <h2 className={styles.description}>Find Inspiration in Everyday Successes
+      </h2>
       <Link href="/api/auth/login" className={styles.link}>
-        Begin Sharing
+        Begin Sharing!
       </Link>
     </main>
   )
