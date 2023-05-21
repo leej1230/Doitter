@@ -33,7 +33,7 @@ export interface Post {
   title: string;
   content: string;
   author_id: string;
-  todo_list: Todo[];
+  todo_list: string[];
   liked_users: string[];
   checked: boolean[];
 }
