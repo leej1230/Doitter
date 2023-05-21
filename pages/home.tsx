@@ -79,17 +79,14 @@ export default function Home() {
               Feed
             </Typography>
             {feedPosts ? (
-              <ul>
-                {feedPosts.map((post) => (
-                  <li key={post._id}>
-                    <Feed_Card
-                      user_id={post.author_id}
-                      todo_list={post.todo_list}
-                      checked={post.checked}
-                    />
-                  </li>
-                ))}
-              </ul>
+              feedPosts.map((post) => (
+                <Feed_Card
+                  key={post._id}
+                  user_id={post.author_id}
+                  todo_list={post.todo_list}
+                  checked={post.checked}
+                />
+              ))
             ) : (
               <h3>No feed!</h3>
             )}
