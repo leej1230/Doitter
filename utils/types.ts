@@ -15,30 +15,34 @@ export interface Todo {
 }
 
 export interface Tag {
+  _id?: number
+  text: string;
+  tag: string[];
+}
+
+export interface Tag {
+  _id?: number
   name: string;
   cnt_used: number;
   cnt_done: number;
 }
 
-export interface ToDo2 {
-  todo_id: string;
-  text: string;
-  tag: string[];
-}
-
 export interface Post {
+  _id?: number
   post_id: string;
   title: string;
   content: string;
   author_id: string;
-  todo_list: ToDo2[];
+  todo_list: string[];
   liked_users: string[];
   checked: boolean[];
 }
 
 export interface User {
+  _id?: number
   user_id: string;
   name: string;
+  profile_img: string
   email: string;
   registered_date: Date;
   liked_posts: string[];
