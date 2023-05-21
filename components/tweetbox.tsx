@@ -95,8 +95,22 @@ const TweetBox = () => {
       console.log(render);
   
       let req = finalizeTodoList();
-      req.user_id = user.sub;
-      req.checked = Array().fill(false);
+      req.user_id = user.nickname;
+      req.checked = Array(req.todo_list.length).fill(false);
+
+      console.log(req)
+
+      await fetch("/api/db/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(req),
+      })
+        .then((response) => response.json())
+        .catch((error) => {
+          console.error("Error:", error);
+        });
   
     };
 

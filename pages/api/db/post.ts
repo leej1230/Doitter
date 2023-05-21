@@ -28,26 +28,34 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     // RESPONSE POST REQUESTS -> POST new post 
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
         try {
-            console.log(req.query);
+          console.log(req.body);
+      
+          const parsedQuery = Object.fromEntries(
+            Object.entries(req.body).map(([key, value]) => {
+              try {
+                if (Array.isArray(value)) {
+                  return [key, value.map(item => JSON.parse(item))];
+                } else if (typeof value === 'string') {
+                  return [key, JSON.parse(value)];
+                }
+                return [key, value];
+              } catch (error) {
+                console.log(`Error parsing ${key}: ${error}`);
+                return [key, value];
+              }
+            })
+          );
 
-            const parsedQuery = Object.fromEntries(
-                Object.entries(req.query).map(([key, value]) => {
-                    if (Array.isArray(value)) {
-                        return [key, value.map(item => JSON.parse(item))];
-                    } else if (typeof value === 'string') {
-                        return [key, JSON.parse(value)];
-                    }
-                    return [key, value];
-                })
-            );
-
-            const createdPost = await Post.create(parsedQuery); // create a new todo
-            res.json(createdPost); // send the created todo as the response
-        } catch(e) {
-            console.log(e);
-            catcher(e);
+          parsedQuery["created"] = Date.now();
+      
+          const createdPost = await Post.create(parsedQuery);
+          res.json(createdPost);
+        } catch (e) {
+          console.log(e);
+          catcher(e);
         }
-    },
+      },
+      
 
     PUT:async (rep:NextApiRequest, res: NextApiResponse) => {
         
