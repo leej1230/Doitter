@@ -3,7 +3,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import { ToDo2 } from '@/utils/types';
-import styles from '../app/page.module.css'
+import { Paper, Typography, Checkbox, Avatar } from '@mui/material';
 
 interface CardProps {
     user_id: string;
@@ -14,36 +14,23 @@ interface CardProps {
 export default function Card({ user_id, todo_list, checked }: CardProps) {
     return (
         <>
-            <li className={styles.list_group_item}>
-                <div className={styles.media}>
-                    <div className={styles.media}>
-                        <a className="avatar avatar-online" href="javascript:void(0)">
-                            <Image src="/avatar1.png" alt="..." width={50} height={50} />
-                            <i></i>
-                        </a>
-                    </div>
-                    <div className="media-body">
-                        <h4 className="media-heading">{user_id}</h4>
-                        <ul>
-                            {todo_list.map((todo, index) => (
-                                <li key={index}>
-                                    <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        value=""
-                                        id={`flexCheckDefault${index}`} // Use a unique ID for each checkbox
-                                        checked={checked[index]} // Set the checked state based on the 'checked' property of each todo item
-                                    />
-                                    <label className="form-check-label" htmlFor={`flexCheckDefault${index}`}>
-                                        {todo.text}
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+            <Paper
+                elevation={3}
+                sx={{ p: 1, my: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Avatar src="/avatar1.png" sx={{ marginRight: '0.5rem' }}></Avatar>
+                    <Typography variant="h6">{user_id}</Typography>
                 </div>
-            </li>
+                {todo_list.map((todo, index) => (
+                    <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                        <Checkbox
+                            checked={checked[index]}
+                            disableRipple={true}
+                            disableFocusRipple={true}></Checkbox>
+                        <Typography variant="body1">{todo.text}</Typography>
+                    </li>
+                ))}
+            </Paper >
         </>
-
     );
 }

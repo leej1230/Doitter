@@ -1,7 +1,7 @@
 import React from 'react';
 import Feed_Card from '../components/feed_card';
-import { Post, ToDo2 } from '../utils/types';
-import styles from '../app/page.module.css';
+import { Post } from '../utils/types';
+import { Typography, Container } from '@mui/material';
 
 const dummyPosts: Post[] = [
     {
@@ -49,8 +49,9 @@ const dummyPosts: Post[] = [
 export default function Home() {
     return (
         <>
-            <h1>Dummy home page</h1>
-            <ul className="list-group-item">
+            <Container
+                sx={{ width: '50%' }}>
+                <Typography variant="h2">Dummy home page</Typography>
                 {dummyPosts.map((post) => (
                     <Feed_Card
                         key={post.post_id}
@@ -59,7 +60,8 @@ export default function Home() {
                         checked={post.checked}
                     />
                 ))}
-            </ul>
+            </Container>
+
         </>
     );
 };
