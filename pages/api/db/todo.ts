@@ -54,7 +54,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             res.json(createdTodo); // send the created todo as the response
         } catch(e) {
             console.log(e);
-            catcher(e);
+            // catcher(e);
         }
     },
 

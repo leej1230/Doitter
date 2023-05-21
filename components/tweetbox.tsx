@@ -87,7 +87,7 @@ const TweetBox = () => {
                 todo_list.push(fields[i].text);
             }
         }
-        return { todo_list: todo_list };
+        return { todo_list: todo_list, user_id: user?.nickname, checked: Array(todo_list.length).fill(false) };
     }
 
     const [open, setOpen] = useState(false);
@@ -96,7 +96,7 @@ const TweetBox = () => {
       console.log(render);
   
       let req = finalizeTodoList();
-      req.user_id = user.nickname;
+      req.user_id = user?.nickname;
       req.checked = Array(req.todo_list.length).fill(false);
 
       console.log(req)

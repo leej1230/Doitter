@@ -52,7 +52,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           res.json(createdPost);
         } catch (e) {
           console.log(e);
-          catcher(e);
+          // catcher(e);
         }
       },
       
@@ -70,7 +70,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
                 );
                 res.json(updateLikedList)
             } catch (e) {
-                catcher(e)
+                // catcher(e)
             }
 
         } else {
@@ -84,7 +84,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
                     )
                 res.json(updateChecked);
             } catch (e) {
-                catcher(e)
+                // catcher(e)
             }
 
         }

@@ -70,7 +70,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             res.json(createdTodo); // send the created todo as the response
         } catch(e) {
             console.log(e);
-            catcher(e);
+            // catcher(e);
         }
     },
 
@@ -87,7 +87,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
                   );
                 res.json(updateLikedList)
             } catch (e) {
-                catcher(e)
+                // catcher(e)
             }
         } else if (rep.query.increment_done_tag) {
 
@@ -99,7 +99,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
                 );
                 res.json(updateLikedList)
             } catch (e) {
-                catcher(e)
+                // catcher(e)
             }
         } else if (rep.query.decrement_used_tag) {
 
@@ -111,7 +111,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
                 );
                 res.json(updateLikedList)
             } catch (e) {
-                catcher(e)
+                // catcher(e)
             }
 
         } else if (rep.query.decrement_done_tag) {
@@ -124,7 +124,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
                 );
                 res.json(updateLikedList)
             } catch (e) {
-                catcher(e)
+                // catcher(e)
             }
         }
 
