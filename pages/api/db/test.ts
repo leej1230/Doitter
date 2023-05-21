@@ -13,11 +13,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Potential Responses
   const handleCase: ResponseFuncs = {
+
     // RESPONSE FOR GET REQUESTS
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Todo } = await connect() // connect to database
       res.json(await Todo.find({}).catch(catcher))
     },
+
     // RESPONSE POST REQUESTS
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Todo } = await connect(); // connect to the database
@@ -25,10 +27,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const todoData = JSON.parse(req.body); // parse the request body
         const createdTodo = await Todo.create(todoData); // create a new todo
         res.json(createdTodo); // send the created todo as the response
-      } catch (error) {
-        catcher(error); // handle the error
+      } catch (e) {
+        catcher(e); // handle the error
       }
     },
+    
   }
 
   // Check if there is a response for the particular method, if so invoke it, if not response with an error

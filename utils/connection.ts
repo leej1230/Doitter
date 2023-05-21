@@ -11,14 +11,44 @@ export const connect = async () => {
     .catch(err => console.log(err))
   console.log("Mongoose Connection Established")
 
-  // OUR TODO SCHEMA
+  // TODO SCHEMA
   const TodoSchema = new mongoose.Schema({
-    item: String,
-    completed: Boolean,
+    text: String,
+    tags: [String],
+  })
+
+  // TAG SCHEMA
+  const TagSchema = new mongoose.Schema({
+    user_id: String,
+    name: [String],
+    cnt_used: JSON,
+    cnt_done: JSON,
+  })
+
+  // POST SCHEMA
+  const PostSchema = new mongoose.Schema({
+    post_id: String,
+    user_id: String,
+    created: Date,
+    todo_list: [String],
+    liked_users: [String],
+    checked: [Boolean],
+  })
+
+  // USER SCHEMA
+  const UserSchema = new mongoose.Schema({
+    user_id: String,
+    name: String,
+    email: String,
+    registered_date: Date,
+    liked_posts: [String],
   })
 
   // OUR TODO MODEL
   const Todo = mongoose.models.Todo || mongoose.model("Todo", TodoSchema)
+  const Tag = mongoose.models.Tag || mongoose.model("Tag", TagSchema)
+  const Post = mongoose.models.Post || mongoose.model("Post", PostSchema)
+  const User = mongoose.models.User || mongoose.model("User", UserSchema)
 
-  return { conn, Todo }
+  return { conn, Todo, Tag, Post, User }
 }
