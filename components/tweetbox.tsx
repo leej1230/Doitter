@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Paper, Typography } from "@mui/material";
+import { Alert, Button, Container, Snackbar, Paper, Typography } from "@mui/material";
 import Todo from "../components/todo";
 
 interface Field {
@@ -19,9 +19,7 @@ const TweetBox = () => {
     const [render, setRender] = useState<boolean[]>(
         // set boolean array of size 100 to false
         // set first element to true
-        Array(100)
-            .fill(false)
-            .map((_, i) => i === 0)
+        Array(100).fill(false).map((_, i) => i === 0)
     );
     const [idx, setIdx] = useState<number>(1);
     const [printing, setPrinting] = useState<number>(1);
@@ -88,32 +86,76 @@ const TweetBox = () => {
         return { todo_list: todo_list };
     }
 
+    const [open, setOpen] = useState(false);
     const handleSubmit = async () => {
         console.log(fields);
         console.log(render);
     };
 
+    const handleClick = () => {
+        handleSubmit();
+        setOpen(true);
+        // clear fields
+        setFields([
+            {
+                idx: 0,
+                text: "",
+                tag: [],
+            },
+        ]);
+        // clear render
+        setRender(
+            Array(100).fill(false).map((_, i) => i === 0)
+        );
+        // clear idx
+        setIdx(1);
+        // clear printing
+        setPrinting(1);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
-        <Paper sx={{ border: 1, p: 2, mt: 1 }} elevation={4}>
-            <Typography variant="h4" sx={{ p: 2 }}>
-                Do It!
-            </Typography>
-            {/* if the field index is set to be rendered, render a todo */}
-            {render.map((value, index) => {
-                if (value) {
-                    return (
-                        <Todo
-                            key={index}
-                            index={index}
-                            text={fields[index]?.text}
-                            removeField={removeField}
-                            updateField={updateField}
-                        />
-                    );
-                }
-            })}
-            <button onClick={handleSubmit}></button>
-        </Paper>
+        <>
+            <Paper sx={{ border: 1, p: 2, mt: 1 }} elevation={4}>
+                <Typography variant="h4" sx={{ p: 2 }}>
+                    Do It!
+                </Typography>
+                {/* if the field index is set to be rendered, render a todo */}
+                {render.map((value, index) => {
+                    if (value) {
+                        return (
+                            <Todo
+                                key={index}
+                                index={index}
+                                text={fields[index]?.text}
+                                removeField={removeField}
+                                updateField={updateField}
+                            />
+                        );
+                    }
+                })}
+                <Button onClick={handleClick} variant="contained" sx={{ bottom: 0, left: '80%', mt: 2 }}>
+                    Do It!
+                </Button>
+            </Paper>
+            <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: '100%' }}
+                >
+                    Posted your todo list!
+                </Alert>
+            </Snackbar>
+        </>
     );
 };
 
