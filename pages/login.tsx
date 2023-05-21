@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 const Home = () => {
   return (
@@ -18,8 +19,8 @@ const Home = () => {
           >
             Home Page
           </p>
-          <a href="/api/auth/login">Login</a><br></br>
-          <a href="/api/auth/logout">Logout</a>
+          <Link href="/api/auth/login">Login</Link><br></br>
+          <Link href="/api/auth/logout">Logout</Link>
         </div>
       </main>
     </>
