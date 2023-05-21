@@ -1,24 +1,69 @@
 import React, { useState } from 'react';
-import { Paper, Button, Checkbox, Container, IconButton, TextField, Typography } from '@mui/material';
-import CloseButton from '@mui/icons-material/Close';
+import { Paper, Typography } from '@mui/material';
+import Todo from '../components/todo';
 
-const TextFieldList = () => {
-    const [fields, setFields] = useState(['']); // State variable to store the list of text fields
+interface Field {
+    idx: number;
+    text: string;
+    tag: string[];
+}
+
+const TweetBox = () => {
+    const [fields, setFields] = useState<Field[]>([
+        {
+            idx: 0,
+            text: '',
+            tag: []
+        },
+    ]);
+    const [render, setRender] = useState<boolean[]>(
+        // set boolean array of size 100 to false
+        // set first element to true
+        Array(100).fill(false).map((_, i) => i === 0)
+    );
+    const [idx, setIdx] = useState<number>(1);
+    const [printing, setPrinting] = useState<number>(1);
 
     const addField = () => {
-        setFields([...fields, '']); // Add a new empty field to the list
+        if (printing >= 10 || idx >= 100) {
+            return;
+        }
+        const newFields = [...fields];
+        newFields.push({
+            idx: idx,
+            text: '',
+            tag: [],
+        });
+        setFields(newFields);
+
+        // set the render value for the current idx to true
+        const newRender = [...render];
+        newRender[idx] = true;
+        setRender(newRender);
+        setIdx(idx + 1);
+        setPrinting(printing + 1);
     };
 
     const removeField = (index: number) => {
-        const updatedFields = [...fields];
-        updatedFields.splice(index, 1); // Remove the field at the specified index
-        setFields(updatedFields);
+        if (printing == 1 && index == 0) {
+            const newFields = [...fields];
+            newFields[0].text = '';
+            setFields(newFields);
+            return;
+        }
+        const newRender = [...render];
+        newRender[index] = false;
+        setRender(newRender);
+        setPrinting(printing - 1);
     };
 
     const updateField = (index: number, value: string) => {
-        const updatedFields = [...fields];
-        updatedFields[index] = value; // Update the field at the specified index
-        setFields(updatedFields);
+        const newFields = [...fields];
+        newFields[index].text = value;
+        setFields(newFields);
+        if (index == idx - 1) {
+            addField();
+        }
     };
 
     return (
@@ -32,33 +77,22 @@ const TextFieldList = () => {
             >
                 Do It!
             </Typography>
-            {fields.map((field, index) => (
-                <Container sx={{ display: 'flex', alignItems: 'center', p: 1 }} key={index}>
-                    <Checkbox
-                        checked={false}
-                        sx={{ left: -20 }}
-                    />
-                    <TextField
-                        hiddenLabel
-                        id={`outlined-basic-${index}`}
-                        variant="outlined"
-                        onChange={(e) => updateField(index, e.target.value)}
-                        placeholder='Add a task...'
-                        fullWidth
-                    />
-                    <IconButton onClick={() => removeField(index)}>
-                        <CloseButton />
-                    </IconButton>
-                </Container>
-            ))}
-            <Button
-                onClick={addField}
-                variant="contained"
-                sx={{ mt: 1.5 }}
-            >
-                Add Field</Button>
+            {/* if the field index is set to be rendered, render a todo */}
+            {render.map((value, index) => {
+                if (value) {
+                    return (
+                        <Todo
+                            key={index}
+                            index={index}
+                            text={fields[index]?.text}
+                            removeField={removeField}
+                            updateField={updateField}
+                        />
+                    );
+                }
+            })}
         </Paper >
     );
 };
 
-export default TextFieldList;
+export default TweetBox;
