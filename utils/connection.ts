@@ -40,6 +40,7 @@ export const connect = async () => {
     user_id: String,
     name: String,
     email: String,
+    profile_img: String,
     registered_date: Date,
     liked_posts: [String],
   })

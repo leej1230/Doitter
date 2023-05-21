@@ -11,6 +11,7 @@ import { ResponseFuncs } from "../../../utils/types"
 {
     "user_id": String,
     "name": String,
+    "profile_img": String
     "email": String,
     "registered_date": Date,
     "liked_posts": String[]
@@ -31,7 +32,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
 
     // RESPONSE FOR GET REQUESTS -> Endpoint that returns username and list of id of liked posts
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
-        const queryResult = User.find({user_id: req.query.user_id}).select({ "name": 1, "liked_posts": 1});
+        const queryResult = User.find({user_id: req.query.user_id});
         res.json(await queryResult);
     },
 
@@ -40,10 +41,16 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     // user_id is the id of the user given by Auth0, name is the username that user wants to use
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
         try {
-            console.log(req.query);
+            console.log(req.body);
+
+            const existingUser = await User.findOne({ user_id: req.body.user_id });
+
+            if (existingUser) {
+                return res.status(409).json({ message: 'User already exists' });
+            }
 
             const parsedQuery = Object.fromEntries(
-                Object.entries(req.query).map(([key, value]) => {
+                Object.entries(req.body).map(([key, value]) => {
                     if (Array.isArray(value)) {
                         return [key, value.map(item => JSON.parse(item))];
                     } else if (typeof value === 'string') {

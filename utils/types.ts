@@ -42,6 +42,7 @@ export interface User {
   _id?: number
   user_id: string;
   name: string;
+  profile_img: string
   email: string;
   registered_date: Date;
   liked_posts: string[];

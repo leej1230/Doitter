@@ -5,6 +5,8 @@ import styles from "../styles/Home.module.css";
 import Sidebar from "../components/sidebar";
 import TweetBox from "../components/tweetbox";
 import { Typography, Container, Link, Paper, Grid } from "@mui/material";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/router";
 
 // const dummyPosts: Post[] = [
 //     {
@@ -50,6 +52,20 @@ import { Typography, Container, Link, Paper, Grid } from "@mui/material";
 // ];
 
 export default function Home() {
+  const router = useRouter();
+  const { user, isLoading } = useUser();
+
+  if (isLoading) {
+    // Handle loading state if needed
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    // User is not logged in, redirect to a different page
+    router.push("/login");
+    return null; // Render nothing while redirecting
+  }
+
   const [feedPosts, setFeedPosts] = useState<Post[]>([]);
 
   const fetchPosts = async () => {
@@ -62,8 +78,29 @@ export default function Home() {
     }
   };
 
+  const uploadUsers = async () => {
+    const postData = { user_id: user.nickname, profile_img: user.picture };
+    console.log(postData);
+
+    await fetch("/api/db/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   useEffect(() => {
     fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    uploadUsers();
   }, []);
 
   return (
@@ -82,7 +119,7 @@ export default function Home() {
               feedPosts.map((post) => (
                 <Feed_Card
                   key={post._id}
-                  user_id={post.author_id}
+                  user_id={post.user_id}
                   todo_list={post.todo_list}
                   checked={post.checked}
                 />
