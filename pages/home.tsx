@@ -1,7 +1,9 @@
 import React from 'react';
 import Feed_Card from '../components/feed_card';
+import Sidebar from '../components/sidebar';
+import TweetBox from '../components/tweetbox';
 import { Post } from '../utils/types';
-import { Typography, Container } from '@mui/material';
+import { Typography, Box, Container, Grid } from '@mui/material';
 
 const dummyPosts: Post[] = [
     {
@@ -49,19 +51,29 @@ const dummyPosts: Post[] = [
 export default function Home() {
     return (
         <>
-            <Container
-                sx={{ width: '50%' }}>
-                <Typography variant="h2">Dummy home page</Typography>
-                {dummyPosts.map((post) => (
-                    <Feed_Card
-                        key={post.post_id}
-                        user_id={post.author_id}
-                        todo_list={post.todo_list}
-                        checked={post.checked}
-                    />
-                ))}
-            </Container>
+            <Grid container spacing={1}>
+                <Grid item xs>
+                    <Sidebar />
+                </Grid>
+                <Grid item xs={6}>
+                    <TweetBox />
+                    <Box sx={{ border: 1, p: 2, mt: 2 }}>
+                        <Typography variant="h4" sx={{ p: 1 }}>Feed</Typography>
 
+                        {dummyPosts.map((post) => (
+                            <Feed_Card
+                                key={post.post_id}
+                                user_id={post.author_id}
+                                todo_list={post.todo_list}
+                                checked={post.checked}
+                            />
+                        ))}
+                    </Box>
+                </Grid>
+                <Grid item xs>
+
+                </Grid>
+            </Grid>
         </>
     );
 };
