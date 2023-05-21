@@ -76,6 +76,12 @@ const TweetBox = () => {
     }
   };
 
+  const finalizeTodoList = () => {
+    // Get all the todos that are rendered based on fields & render
+    // Make JSON and on field todo_list, store array of task names
+    
+  }
+
   const handleSubmit = async () => {
     console.log(fields);
     console.log(render);
