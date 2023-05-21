@@ -45,9 +45,7 @@ const TweetBox = () => {
     };
 
     const removeField = (index: number) => {
-        // find lowest index that is true
-        const lowest = render.indexOf(true);
-        if (printing == 1 && lowest == index) {
+        if (printing == 1) {
             const newFields = [...fields];
             newFields[index].text = '';
             setFields(newFields);
