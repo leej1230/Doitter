@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Paper, Typography } from "@mui/material";
 import Todo from "../components/todo";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 interface Field {
   idx: number;
@@ -9,6 +10,7 @@ interface Field {
 }
 
 const TweetBox = () => {
+  const { user, isLoading } = useUser();
   const [fields, setFields] = useState<Field[]>([
     {
       idx: 0,
@@ -79,12 +81,17 @@ const TweetBox = () => {
   const finalizeTodoList = () => {
     // Get all the todos that are rendered based on fields & render
     // Make JSON and on field todo_list, store array of task names
-    
+
   }
 
   const handleSubmit = async () => {
     console.log(fields);
     console.log(render);
+
+    let req = finalizeTodoList();
+    req.user_id = user.sub;
+    req.checked = Array().fill(false);
+
   };
 
   return (
