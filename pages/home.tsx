@@ -8,49 +8,6 @@ import { Typography, Container, Link, Paper, Grid } from "@mui/material";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 
-// const dummyPosts: Post[] = [
-//     {
-//         post_id: '1',
-//         title: 'First post',
-//         content: 'This is the first post.',
-//         author_id: 'user1',
-//         todo_list: [
-//             {
-//                 todo_id: 'taskA',
-//                 text: 'taskA',
-//                 tag: []
-//             },
-//             {
-//                 todo_id: 'taskB',
-//                 text: 'taskB',
-//                 tag: []
-//             },
-//             {
-//                 todo_id: 'taskC',
-//                 text: 'taskC',
-//                 tag: []
-//             }
-//         ],
-//         liked_users: ['user2', 'user3'],
-//         checked: [false, true, false],
-//     },
-//     {
-//         post_id: '2',
-//         title: 'Second post',
-//         content: 'This is the second post.',
-//         author_id: 'user2',
-//         todo_list: [
-//             {
-//                 todo_id: 'taskD',
-//                 text: 'taskD',
-//                 tag: []
-//             },
-//         ],
-//         liked_users: ['user1', 'user3'],
-//         checked: [true],
-//     },
-// ];
-
 export default function Home() {
   const router = useRouter();
   const { user, isLoading } = useUser();
@@ -99,12 +56,12 @@ export default function Home() {
     const interval = setInterval(() => {
       fetchPosts();
     }, 1000);
-  
+
     return () => {
       clearInterval(interval);
     };
   }, []);
-  
+
 
   useEffect(() => {
     uploadUsers();
@@ -140,7 +97,7 @@ export default function Home() {
       </Grid>
       <Container sx={{ justifyContent: "center", display: "flex", mt: 3 }}>
         <Typography variant="h6" sx={{ m: 1 }}>
-          Do It&apos;er created by{" "}
+          Do Itter created by{" "}
         </Typography>
         <Link
           variant="h6"
