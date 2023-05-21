@@ -2,10 +2,13 @@ import React from 'react';
 // https://www.bootdey.com/snippets/view/twitter-feeds#css
 
 import Image from 'next/image';
+import { ToDo2 } from '@/utils/types';
+import { Checkbox } from '@mui/material'
+import styles from '../components/feed_card.module.css'
 
 interface CardProps {
     user_id: string;
-    todo_list: string[];
+    todo_list: ToDo2[];
     checked: boolean[];
 }
 
@@ -16,14 +19,20 @@ export default function Card({ user_id, todo_list, checked }: CardProps) {
                 <div className="media">
                     <div className="media-left">
                         <a className="avatar avatar-online" href="javascript:void(0)">
-                            <Image src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." />
+                            <Image src="/avatar1.png" alt="..." width={50} height={50} />
                             <i></i>
                         </a>
                     </div>
                     <div className="media-body">
-                        <small className="text-muted pull-right">Just now</small>
                         <h4 className="media-heading">{user_id}</h4>
-                        <div></div>
+                        <ul>
+                            {todo_list.map((todo, index) => (
+                                <li key={index}>
+                                    <Checkbox checked={checked[index]} />
+                                    <span>{todo.text}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </li>
