@@ -2,6 +2,9 @@ import React from 'react';
 import { Button, Box, Stack, TextField } from '@mui/material';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import SearchIcon from '@mui/icons-material/Search';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 export default function Sidebar() {
     return (
@@ -14,6 +17,7 @@ export default function Sidebar() {
                         sx={{ minWidth: 200 }}
                         style={{ fontSize: 25 }}
                         startIcon={<LibraryAddCheckIcon />}
+                        href="/home"
                     >Home</Button>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
@@ -32,13 +36,32 @@ export default function Sidebar() {
                     ></TextField>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
-                    <Button variant="text" color="primary" sx={{ minWidth: 200 }} style={{ fontSize: 20 }}>Profile</Button>
+                    <Button
+                        variant="text"
+                        color="primary"
+                        sx={{ minWidth: 200 }}
+                        style={{ fontSize: 20 }}
+                        startIcon={<AccountBoxIcon />}
+                    >Profile</Button>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button variant="text" color="primary" sx={{ minWidth: 200 }} style={{ fontSize: 20 }}>Notifications</Button>
+                    <Button
+                        variant="text"
+                        color="primary"
+                        sx={{ minWidth: 200 }}
+                        style={{ fontSize: 20 }}
+                        startIcon={<NotificationsIcon />}
+                    >Notifications</Button>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button variant="text" color="primary" sx={{ minWidth: 200 }} style={{ fontSize: 20 }}>Button</Button>
+                    <Button
+                        variant="text"
+                        color="primary"
+                        sx={{ minWidth: 200 }}
+                        style={{ fontSize: 20 }}
+                        href="/api/auth/logout"
+                        startIcon={<LogoutIcon />}
+                    >Logout</Button>
                 </Box>
             </Stack >
         </>
