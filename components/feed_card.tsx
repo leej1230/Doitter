@@ -3,7 +3,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import { ToDo2 } from '@/utils/types';
-import { Paper, Typography, Checkbox, Avatar } from '@mui/material';
+import { Paper, Typography, Stack, Container, Checkbox, Avatar } from '@mui/material';
 
 interface CardProps {
     user_id: string;
@@ -16,20 +16,26 @@ export default function Card({ user_id, todo_list, checked }: CardProps) {
         <>
             <Paper
                 elevation={3}
-                sx={{ p: 1, my: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar src="/avatar1.png" sx={{ marginRight: '0.5rem' }}></Avatar>
-                    <Typography variant="h6">{user_id}</Typography>
-                </div>
-                {todo_list.map((todo, index) => (
-                    <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
-                        <Checkbox
-                            checked={checked[index]}
-                            disableRipple={true}
-                            disableFocusRipple={true}></Checkbox>
-                        <Typography variant="body1">{todo.text}</Typography>
-                    </li>
-                ))}
+                sx={{ p: 1, mt: 1, mb: 1.5 }}>
+                <Stack>
+                    <Container sx={{ display: 'flex', alignItems: 'center', mt: 1, mb: 1 }}>
+                        <Avatar src="/avatar1.png" sx={{ marginRight: '0.5rem', left: -18 }}></Avatar>
+                        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{user_id}</Typography>
+                    </Container>
+                    <Stack>
+                        {todo_list.map((todo, index) => (
+                            <Container key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                                <Checkbox
+                                    checked={checked[index]}
+                                    disableRipple={true}
+                                    disableFocusRipple={true}
+                                    sx={{ left: -20 }}
+                                ></Checkbox>
+                                <Typography variant="body1">{todo.text}</Typography>
+                            </Container>
+                        ))}
+                    </Stack>
+                </Stack>
             </Paper >
         </>
     );
