@@ -61,7 +61,15 @@ const TweetBox = () => {
         const newFields = [...fields];
         newFields[index].text = value;
         setFields(newFields);
-        if (index == idx - 1) {
+        // find the last render index that is not empty
+        let lastRender = -1;
+        for (let i = render.length; i >= 0; i--) {
+            if (render[i]) {
+                lastRender = i;
+                break;
+            }
+        }
+        if (index === lastRender) {
             addField();
         }
     };
