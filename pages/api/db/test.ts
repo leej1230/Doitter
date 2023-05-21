@@ -25,8 +25,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const todoData = JSON.parse(req.body); // parse the request body
         const createdTodo = await Todo.create(todoData); // create a new todo
         res.json(createdTodo); // send the created todo as the response
-      } catch (error) {
-        catcher(error); // handle the error
+      } catch (e) {
+        catcher(e); // handle the error
       }
     },
   }
