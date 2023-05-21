@@ -14,14 +14,15 @@ export const connect = async () => {
   // TODO SCHEMA
   const TodoSchema = new mongoose.Schema({
     text: String,
-    tag: [String],
+    tags: [String],
   })
 
   // TAG SCHEMA
   const TagSchema = new mongoose.Schema({
-    name: String,
-    cnt_used: Number,
-    cnt_done: Number,
+    user_id: String,
+    name: [String],
+    cnt_used: JSON,
+    cnt_done: JSON,
   })
 
   // POST SCHEMA
