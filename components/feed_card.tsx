@@ -3,8 +3,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import { ToDo2 } from '@/utils/types';
-import { Checkbox } from '@mui/material'
-import styles from '../components/feed_card.module.css'
+import styles from '../app/page.module.css'
 
 interface CardProps {
     user_id: string;
@@ -15,9 +14,9 @@ interface CardProps {
 export default function Card({ user_id, todo_list, checked }: CardProps) {
     return (
         <>
-            <li className="list-group-item">
-                <div className="media">
-                    <div className="media-left">
+            <li className={styles.list_group_item}>
+                <div className={styles.media}>
+                    <div className={styles.media}>
                         <a className="avatar avatar-online" href="javascript:void(0)">
                             <Image src="/avatar1.png" alt="..." width={50} height={50} />
                             <i></i>
@@ -28,8 +27,16 @@ export default function Card({ user_id, todo_list, checked }: CardProps) {
                         <ul>
                             {todo_list.map((todo, index) => (
                                 <li key={index}>
-                                    <Checkbox checked={checked[index]} />
-                                    <span>{todo.text}</span>
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id={`flexCheckDefault${index}`} // Use a unique ID for each checkbox
+                                        checked={checked[index]} // Set the checked state based on the 'checked' property of each todo item
+                                    />
+                                    <label className="form-check-label" htmlFor={`flexCheckDefault${index}`}>
+                                        {todo.text}
+                                    </label>
                                 </li>
                             ))}
                         </ul>

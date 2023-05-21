@@ -1,7 +1,7 @@
 import React from 'react';
 import Feed_Card from '../components/feed_card';
 import { Post, ToDo2 } from '../utils/types';
-import styles from '../styles/Home.module.css';
+import styles from '../app/page.module.css';
 
 const dummyPosts: Post[] = [
     {
@@ -50,15 +50,14 @@ export default function Home() {
     return (
         <>
             <h1>Dummy home page</h1>
-            <ul>
+            <ul className="list-group-item">
                 {dummyPosts.map((post) => (
-                    <li key={post.post_id}>
-                        <Feed_Card
-                            user_id={post.author_id}
-                            todo_list={post.todo_list}
-                            checked={post.checked}
-                        />
-                    </li>
+                    <Feed_Card
+                        key={post.post_id}
+                        user_id={post.author_id}
+                        todo_list={post.todo_list}
+                        checked={post.checked}
+                    />
                 ))}
             </ul>
         </>
