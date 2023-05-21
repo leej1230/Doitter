@@ -144,7 +144,7 @@ const TweetBox = () => {
         <>
             <Paper sx={{ border: 1, p: 2, mt: 1 }} elevation={4}>
                 <Typography variant="h4" sx={{ p: 2 }}>
-                    Do It!
+                    What are your ToDos?
                 </Typography>
                 {/* if the field index is set to be rendered, render a todo */}
                 {render.map((value, index) => {
@@ -161,7 +161,7 @@ const TweetBox = () => {
                     }
                 })}
                 <Button onClick={handleClick} variant="contained" sx={{ bottom: 0, left: '80%', mt: 2 }}>
-                    Do It!
+                    SHARE!
                 </Button>
             </Paper>
             <Snackbar
